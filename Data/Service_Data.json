@@ -1,0 +1,184 @@
+{
+  "service": {
+    "account balance": {
+      "inherits":"None",
+      "operations": [
+        "get"
+      ],
+	          "keys": [
+          "account number", "business partner"
+        ],
+        "attributes": {
+          "account number": {
+            "type": "string",
+            "multipleValues": "True",
+            "default": "None",
+			"re":"None",
+            "query statement": "By the way which account."
+          },
+          "date": {
+            "type": "date",
+            "multipleValues": "False",
+            "default": "current",
+            "re":"None",
+            "query statement": "Give me a particular date."
+          },
+          "business partner": {
+            "type": "string",
+            "multipleValues": "False",
+            "default": "VAIB24",
+            "query statement": "What is your user name."
+          }
+        },
+      "get": {
+      }
+    },
+
+    "deposit": {
+      "inherits":"None",
+      "operations": [
+        "create"
+      ],
+	          "keys": [
+          "business partner","deposit type","duration","amount"
+        ],
+        "attributes": {
+          "deposit type": {
+            "type": "string",
+            "multipleValues": "True",
+            "default": "None",
+            "re":"(recurring deposit)|(fixed deposit)",
+            "query statement": "Select what kind of investment you are looking for.",
+            "select values":
+            [
+              {"id":"xx","name":"Select Here!!"},
+              {"id":"recurring deposit","name":"Recurring Deposit"},
+              {"id":"fixed deposit","name":"Fixed Deposit"}
+            ]
+
+          },
+          "duration type": {
+            "type": "string",
+            "multipleValues": "True",
+            "default": "None",
+            "re":"(year|month)s?",
+            "query statement": "Select month or year",
+            "select values":
+            [
+              {"id":"xx","name":"Select Here!!"},
+              {"id":"year","name":"Year(s)"},
+              {"id":"month","name":"Month(s)"}
+            ]
+
+          },
+          "duration number": {
+            "type": "integer",
+            "multipleValues": "False",
+            "default": "None",
+            "re":"\\d*?",
+            "query statement": "How much is the duration"
+          },
+          "duration": {
+            "expression":"$$duration number$$ $$duration type$$",
+            "type": "expression",
+            "multipleValues": "False",
+            "default": "None",
+			"re":"None",
+            "query statement": "How much is the duration"
+          },
+          "amount": {
+            "type": "decimal",
+            "multipleValues": "False",
+            "default": "None",
+            "re":"\\d*?",
+            "query statement": "What is the investment amount."
+          }
+        },
+      "create": {
+      }
+    },
+
+    "recurring deposit": {
+      "inherits":"deposit",
+      "operations": [
+        "create"
+      ],
+	          "keys": [
+          "deposit frequency"
+        ],
+        "attributes": {
+          "frequency type": {
+            "type": "string",
+            "multipleValues": "True",
+            "default": "None",
+            "query statement": "Select monthly or yearly",
+            "select values":
+            [
+              {"id":"xx","name":"Select Here!!"},
+              {"id":"yearly","name":"Yearly"},
+              {"id":"monthly","name":"Monthly"}
+            ]
+
+          }
+        },
+      "create": {
+      }
+    },
+
+    "fixed deposit": {
+      "inherits":"deposit",
+      "operations": [
+        "create"
+      ],
+	          "keys": [
+
+        ],
+        "attributes": {
+
+        },
+      "create": {
+      }
+    },
+
+    "payment": {
+      "inherits":"None",
+      "operations": [
+        "get"
+      ],
+	          "keys": [
+          "account number", "business partner", "amount"
+        ],
+        "attributes": {
+          "account number": {
+            "type": "string",
+            "multipleValues": "True",
+            "default": "None",
+			"re":"None",
+            "query statement": "Who is the lucky one from below?"
+          },
+          "date": {
+            "type": "date",
+            "multipleValues": "False",
+            "default": "current",
+            "re":"None",
+            "query statement": "Give me a particular date."
+          },
+          "business partner": {
+            "type": "string",
+            "multipleValues": "False",
+            "default": "VAIB24",
+            "query statement": "What is your user name."
+          },
+          "amount": {
+            "type": "decimal",
+            "multipleValues": "False",
+            "default": "None",
+            "re":"\\d*?",
+            "query statement": "how much you want to transfer."
+          }
+        },
+      "get": {
+      }
+    }
+  }
+}
